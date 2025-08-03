@@ -1,33 +1,35 @@
 package wild.yellow;
 
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.List;
 
 public record Statistics(Option option) {
 
-    public void printStat(List<Integer> integers, List<Double> doubles, List<String> strings) {
+    public void printStat(List<BigInteger> integers, List<BigDecimal> doubles, List<String> strings) {
         if (!integers.isEmpty()) {
             System.out.println("Статистика для целых чисел:\n" +
                     "Количество элементов записанных в исходный файл: " + integers.size());
 
             if (option.isFullStat()) {
-                int min = integers.stream()
-                        .min(Integer::compare)
-                        .orElse(0);
+                BigInteger min = integers.stream()
+                        .min(BigInteger::compareTo)
+                        .orElse(BigInteger.valueOf(0));
 
-                int max = integers.stream()
-                        .max(Integer::compare)
-                        .orElse(0);
+                BigInteger max = integers.stream()
+                        .max(BigInteger::compareTo)
+                        .orElse(BigInteger.valueOf(0));
 
-                int sum = integers.stream()
-                        .mapToInt(Integer::intValue)
-                        .sum();
+                BigInteger sum = BigInteger.valueOf(integers.stream()
+                        .mapToInt(BigInteger::intValue)
+                        .sum());
 
-                double average = integers.stream()
-                        .mapToDouble(Integer::doubleValue)
+                BigDecimal average = BigDecimal.valueOf(integers.stream()
+                        .mapToDouble(BigInteger::doubleValue)
                         .average()
-                        .orElse(0.0);
+                        .orElse(0.0));
 
-                System.out.printf("Минимум: %d\nМаксимум: %d\nСумма: %d\nСреднее: %.2f\n", min, max, sum, average);
+                System.out.printf("Минимум: %s\nМаксимум: %s\nСумма: %s\nСреднее: %s\n", min, max, sum, average);
 
             }
         }
@@ -37,24 +39,24 @@ public record Statistics(Option option) {
                     "Количество элементов записанных в исходный файл: " + doubles.size());
 
             if (option.isFullStat()) {
-                double min = doubles.stream()
-                        .min(Double::compare)
-                        .orElse(0.0);
+                BigDecimal min = doubles.stream()
+                        .min(BigDecimal::compareTo)
+                        .orElse(BigDecimal.valueOf(0.0));
 
-                double max = doubles.stream()
-                        .max(Double::compare)
-                        .orElse(0.0);
+                BigDecimal max = doubles.stream()
+                        .max(BigDecimal::compareTo)
+                        .orElse(BigDecimal.valueOf(0.0));
 
-                double sum = doubles.stream()
-                        .mapToDouble(Double::doubleValue)
-                        .sum();
+                BigDecimal sum = BigDecimal.valueOf(doubles.stream()
+                        .mapToDouble(BigDecimal::doubleValue)
+                        .sum());
 
-                double average = doubles.stream()
-                        .mapToDouble(Double::doubleValue)
+                BigDecimal average = BigDecimal.valueOf(doubles.stream()
+                        .mapToDouble(BigDecimal::doubleValue)
                         .average()
-                        .orElse(0.0);
+                        .orElse(0.0));
 
-                System.out.printf("Минимум: %.2f\nМаксимум: %.2f\nСумма: %.2f\nСреднее: %.2f\n",
+                System.out.printf("Минимум: %s\nМаксимум: %s\nСумма: %s\nСреднее: %s\n",
                         min, max, sum, average);
 
             }

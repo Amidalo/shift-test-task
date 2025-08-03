@@ -1,5 +1,8 @@
 package wild.yellow;
 
+import java.math.BigDecimal;
+import java.math.BigInteger;
+
 public class DataTypeDefiner {
 
     public record DefinedType(DataTypeDefiner.DefinedType.Type type, Object value) {
@@ -19,10 +22,10 @@ public class DataTypeDefiner {
 
         try {
             if (input.contains(".")) {
-                double value = Double.parseDouble(input);
+                BigDecimal value = new BigDecimal(input);
                 return new DefinedType(DefinedType.Type.DOUBLE, value);
             } else {
-                int value = Integer.parseInt(input);
+                BigInteger value = new BigInteger(input);
                 return new DefinedType(DefinedType.Type.INTEGER, value);
             }
         } catch (NumberFormatException e) {
