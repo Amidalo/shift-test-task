@@ -10,7 +10,7 @@ import java.util.List;
 
 public record FileWriter(Option option) {
 
-    public void writeToFile(List<BigInteger> integers, List<BigDecimal> doubles, List<String> strings) throws IOException {
+    public void writeToFile(List<BigInteger> integers, List<BigDecimal> floats, List<String> strings) throws IOException {
         if (!integers.isEmpty()) {
             Path path = option.getResultPath().resolve(option.getPrefix() + "integers.txt");
             Files.createDirectories(path.getParent());
@@ -25,12 +25,12 @@ public record FileWriter(Option option) {
             }
         }
 
-        if (!doubles.isEmpty()) {
-            Path path = option.getResultPath().resolve(option.getPrefix() + "doubles.txt");
+        if (!floats.isEmpty()) {
+            Path path = option.getResultPath().resolve(option.getPrefix() + "floats.txt");
             Files.createDirectories(path.getParent());
 
             try (BufferedWriter writer = new BufferedWriter(new java.io.FileWriter(path.toFile(), option.isAddedToAnExistingFile()))) {
-                for (BigDecimal it : doubles) {
+                for (BigDecimal it : floats) {
                     writer.write(String.valueOf(it));
                     writer.newLine();
                 }
