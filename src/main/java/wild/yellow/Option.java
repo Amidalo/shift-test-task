@@ -43,11 +43,12 @@ public class Option {
             switch (args[i]) {
                 case "-a" -> isAddedToAnExistingFile = true;
                 case "-o" -> {
-                    if (i + 1 < args.length && !args[i].startsWith("-")) resultPath = args[++i];
+                    if (i + 1 < args.length && !args[i + 1].startsWith("-")) resultPath = args[++i];
                     else throw new IllegalArgumentException("Не указан путь для сохранения результатов!");
                 }
                 case "-p" -> {
-                    if (i + 1 < args.length && !args[i].startsWith("-")) prefix = args[++i];
+                    if (i + 1 < args.length && !args[i + 1].startsWith("-") && !args[i + 1].contains(".txt"))
+                        prefix = args[++i];
                     else throw new IllegalArgumentException("Не указан префикс для выходных файлов!");
                 }
                 case "-s" ->  {
